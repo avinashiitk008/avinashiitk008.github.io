@@ -328,3 +328,61 @@ document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
    ---------------------------------------------------------- */
 console.log('%c🔬 Dr. Avinash Kumar — Academic Profile', 'font-size:1.4rem; font-weight:700; color:#6c8cff;');
 console.log('%cProject Scientist, IIT Kanpur • Enzyme Technology & Nanobiotechnology', 'color:#8b8fa3;');
+
+/* ----------------------------------------------------------
+   15. NEWS MODAL — HOVER GLASS + CLICK POP-OUT
+   ---------------------------------------------------------- */
+(function() {
+  // Build modal DOM once
+  const modal = document.createElement('div');
+  modal.className = 'news-modal';
+  modal.innerHTML = `
+    <div class="news-modal-backdrop"></div>
+    <div class="news-modal-content">
+      <button class="news-modal-close" aria-label="Close">&times;</button>
+      <div class="news-modal-body"></div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  const backdrop  = modal.querySelector('.news-modal-backdrop');
+  const closeBtn  = modal.querySelector('.news-modal-close');
+  const modalBody = modal.querySelector('.news-modal-body');
+
+  function openModal(item) {
+    // Clone the clicked news-item content into the modal
+    const clone = item.cloneNode(true);
+    // Strip interactive state from clone
+    clone.style.transform = 'none';
+    clone.style.cursor = 'default';
+    clone.classList.remove('active');
+    modalBody.innerHTML = '';
+    modalBody.appendChild(clone);
+    // Trigger reflow for entrance animation
+    modal.offsetHeight;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Click news-item → open modal
+  document.querySelectorAll('.news-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      e.stopPropagation();
+      openModal(this);
+    });
+  });
+
+  // Backdrop click → close
+  backdrop.addEventListener('click', closeModal);
+  // Close button → close
+  closeBtn.addEventListener('click', closeModal);
+  // Escape key → close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+})();
