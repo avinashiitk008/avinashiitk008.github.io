@@ -299,7 +299,7 @@ console.log('%c🔬 Dr. Avinash Kumar — Academic Profile', 'font-size:1.4rem; 
 console.log('%cProject Scientist, IIT Kanpur • Enzyme Technology & Nanobiotechnology', 'color:#8b8fa3;');
 
 /* ----------------------------------------------------------
-   13. NEWS MODAL — HOVER GLASS + CLICK POP-OUT
+   13. CARD MODAL — GLASS HOVER + CLICK POP-OUT
    ---------------------------------------------------------- */
 (function() {
   // Build modal DOM once
@@ -338,9 +338,11 @@ console.log('%cProject Scientist, IIT Kanpur • Enzyme Technology & Nanobiotech
     document.body.style.overflow = '';
   }
 
-  // Click news-item → open modal
-  document.querySelectorAll('.news-item').forEach(item => {
+  // Click cards → open modal (all card types with glass hover)
+  document.querySelectorAll('.news-item, .rcard, .pub-item, .skill-card, .stat-box, .contact-card, .fact').forEach(item => {
     item.addEventListener('click', function(e) {
+      // Don't open modal if clicking a link inside the card
+      if (e.target.closest('a')) return;
       e.stopPropagation();
       openModal(this);
     });
