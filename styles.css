@@ -787,6 +787,103 @@ ul  { list-style: none; }
   color: var(--primary);
 }
 
+/* ---------- NEWS & UPDATES (Research News / What's New) ---------- */
+.news-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.news-column h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.news-item {
+  display: flex;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+.news-item:hover {
+  border-color: rgba(108,140,255,0.15);
+  transform: translateX(4px);
+}
+
+.news-date {
+  flex-shrink: 0;
+  width: 52px;
+  text-align: center;
+  padding: 8px 4px;
+  background: var(--surface);
+  border-radius: 8px;
+  align-self: flex-start;
+}
+.news-date-day {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.1;
+}
+.news-date-month {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.news-content {
+  flex: 1;
+  min-width: 0;
+}
+.news-content h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+.news-content p {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.news-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 100px;
+  background: rgba(108,140,255,0.08);
+  color: var(--primary);
+  border: 1px solid rgba(108,140,255,0.12);
+  margin-top: 6px;
+}
+.news-tag.green { background: rgba(74,222,128,0.08); color: var(--green); border-color: rgba(74,222,128,0.15); }
+.news-tag.orange { background: rgba(251,146,60,0.08); color: var(--orange); border-color: rgba(251,146,60,0.15); }
+
+@media (max-width: 768px) {
+  .news-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
 /* ---------- FOOTER ---------- */
 .footer {
   border-top: 1px solid var(--border);
