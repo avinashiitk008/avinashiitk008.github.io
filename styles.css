@@ -429,6 +429,73 @@ ul  { list-style: none; }
   font-weight: 600;
   color: #fff;
 }
+.about-subtitle {
+  font-size: 1rem;
+  color: var(--primary);
+  margin-bottom: 24px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.about-card-intro {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-top: -16px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.about-highlight-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.about-highlight-item {
+  padding: 10px 12px;
+  background: var(--surface);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.about-highlight-label {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 2px;
+}
+.about-highlight-value {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.3;
+}
+.about-highlight-value sub {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+.about-fellowship-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.about-fellowship-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+.about-fellowship-list li:last-child {
+  border-bottom: none;
+}
+.about-fellowship-list li strong {
+  color: var(--text);
+}
+.about-fellowship-detail {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
 
 .skill-card {
   background: var(--bg-card);
