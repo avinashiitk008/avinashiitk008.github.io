@@ -91,34 +91,17 @@ const PUBLICATIONS = [
 ];
 
 /* ----------------------------------------------------------
-   2. TEAM / CO-AUTHOR DATA
-   ---------------------------------------------------------- */
-const TEAM = [
-  { name: "Prof. A. M. Kayastha", role: "Senior Supervisor, BHU", initials: "AK" },
-  { name: "Dr. V. K. Singh", role: "Research Collaborator", initials: "VS" },
-  { name: "Dr. R. Das", role: "Research Collaborator", initials: "RD" },
-  { name: "Dr. C. Singh", role: "Research Collaborator", initials: "CS" },
-  { name: "Dr. R. R. Kumar", role: "Research Collaborator", initials: "RK" },
-  { name: "Dr. V. Chaturvedi", role: "Research Collaborator", initials: "VC" },
-  { name: "Dr. R. Dutt", role: "Research Collaborator", initials: "RD" },
-  { name: "Dr. A. Srivastava", role: "Research Collaborator", initials: "AS" },
-  { name: "A. Aaditya", role: "Research Collaborator", initials: "AA" },
-  { name: "Dr. P. Kumar", role: "Research Collaborator", initials: "PK" }
-];
-
-/* ----------------------------------------------------------
-   3. DOM REFERENCES
+   2. DOM REFERENCES
    ---------------------------------------------------------- */
 const navbar    = document.getElementById('navbar');
 const navLinks  = document.getElementById('navLinks');
 const mobileBtn = document.getElementById('mobileToggle');
 const backTop   = document.getElementById('backTop');
 const pubList   = document.getElementById('pubList');
-const teamGrid  = document.getElementById('teamGrid');
 const pubFilters = document.querySelectorAll('.pfilter');
 
 /* ----------------------------------------------------------
-   4. NAVBAR — SCROLL EFFECT & MOBILE TOGGLE
+   3. NAVBAR — SCROLL EFFECT & MOBILE TOGGLE
    ---------------------------------------------------------- */
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
@@ -140,7 +123,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
 });
 
 /* ----------------------------------------------------------
-   5. ACTIVE NAV LINK — HIGHLIGHT ON SCROLL
+   4. ACTIVE NAV LINK — HIGHLIGHT ON SCROLL
    ---------------------------------------------------------- */
 const sections = document.querySelectorAll('section[id]');
 
@@ -165,7 +148,7 @@ window.addEventListener('scroll', updateActiveNav);
 window.addEventListener('load', updateActiveNav);
 
 /* ----------------------------------------------------------
-   6. REVEAL ANIMATIONS — INTERSECTION OBSERVER
+   5. REVEAL ANIMATIONS — INTERSECTION OBSERVER
    ---------------------------------------------------------- */
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -181,7 +164,7 @@ document.querySelectorAll('[data-reveal]').forEach(el => {
 });
 
 /* ----------------------------------------------------------
-   7. COUNT-UP ANIMATION
+   6. COUNT-UP ANIMATION
    ---------------------------------------------------------- */
 function animateCountUp(el) {
   const target = parseInt(el.dataset.count, 10);
@@ -212,7 +195,7 @@ const countObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
 
 /* ----------------------------------------------------------
-   8. SKILL BAR FILL ANIMATION
+   7. SKILL BAR FILL ANIMATION
    ---------------------------------------------------------- */
 const skillObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -228,7 +211,7 @@ const skillObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.skill-fill').forEach(el => skillObserver.observe(el));
 
 /* ----------------------------------------------------------
-   9. STAT RING (SVG CIRCLE) ANIMATION
+   8. STAT RING (SVG CIRCLE) ANIMATION
    ---------------------------------------------------------- */
 const ringObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -247,7 +230,7 @@ const ringObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.stat-ring-fill').forEach(el => ringObserver.observe(el));
 
 /* ----------------------------------------------------------
-   10. PUBLICATIONS — RENDER & FILTER
+   9. PUBLICATIONS — RENDER & FILTER
    ---------------------------------------------------------- */
 function renderPublications(yearFilter = 'all') {
   const filtered = yearFilter === 'all'
@@ -290,28 +273,14 @@ pubFilters.forEach(btn => {
 renderPublications('all');
 
 /* ----------------------------------------------------------
-   11. TEAM — RENDER
-   ---------------------------------------------------------- */
-teamGrid.innerHTML = TEAM.map(t => `
-  <div class="team-card" data-reveal>
-    <div class="team-avatar">${t.initials}</div>
-    <div class="team-name">${t.name}</div>
-    <div class="team-role">${t.role}</div>
-  </div>
-`).join('');
-
-// Re-observe team [data-reveal]
-teamGrid.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
-
-/* ----------------------------------------------------------
-   12. BACK TO TOP — SMOOTH SCROLL
+   10. BACK TO TOP — SMOOTH SCROLL
    ---------------------------------------------------------- */
 backTop.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 /* ----------------------------------------------------------
-   13. SMOOTH SCROLL FOR NAV ANCHORS (fallback if CSS fails)
+   11. SMOOTH SCROLL FOR NAV ANCHORS (fallback if CSS fails)
    ---------------------------------------------------------- */
 document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
   link.addEventListener('click', (e) => {
@@ -324,13 +293,13 @@ document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
 });
 
 /* ----------------------------------------------------------
-   14. CONSOLE — WELCOME MESSAGE
+   12. CONSOLE — WELCOME MESSAGE
    ---------------------------------------------------------- */
 console.log('%c🔬 Dr. Avinash Kumar — Academic Profile', 'font-size:1.4rem; font-weight:700; color:#6c8cff;');
 console.log('%cProject Scientist, IIT Kanpur • Enzyme Technology & Nanobiotechnology', 'color:#8b8fa3;');
 
 /* ----------------------------------------------------------
-   15. NEWS MODAL — HOVER GLASS + CLICK POP-OUT
+   13. NEWS MODAL — HOVER GLASS + CLICK POP-OUT
    ---------------------------------------------------------- */
 (function() {
   // Build modal DOM once
