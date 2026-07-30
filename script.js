@@ -91,7 +91,75 @@ const PUBLICATIONS = [
 ];
 
 /* ----------------------------------------------------------
-   2. DOM REFERENCES
+   2. THEME TOGGLE — DAY/NIGHT
+   ---------------------------------------------------------- */
+const themeToggle = document.getElementById('themeToggle');
+const STORAGE_KEY = 'avinash-theme';
+
+function setTheme(theme, animate = true) {
+  if (animate) {
+    // Add transition class for smooth colour morphing
+    document.documentElement.classList.add('theme-transitioning');
+  }
+
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+
+  localStorage.setItem(STORAGE_KEY, theme);
+
+  if (animate) {
+    // Remove transition lock after transitions complete
+    setTimeout(() => {
+      document.documentElement.classList.remove('theme-transitioning');
+    }, 500);
+  }
+}
+
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const newTheme = isDark ? 'light' : 'dark';
+
+  // Create ripple overlay from toggle button position
+  const rect = themeToggle.getBoundingClientRect();
+  const x = Math.round(rect.left + rect.width / 2);
+  const y = Math.round(rect.top + rect.height / 2);
+
+  const overlay = document.createElement('div');
+  overlay.className = 'theme-overlay';
+  overlay.style.setProperty('--x', x + 'px');
+  overlay.style.setProperty('--y', y + 'px');
+  document.body.appendChild(overlay);
+
+  // Switch theme while overlay is animating
+  setTheme(newTheme);
+
+  // Remove overlay after animation
+  setTimeout(() => {
+    overlay.remove();
+  }, 750);
+}
+
+// Load saved theme on page load
+(function initTheme() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (saved) {
+    setTheme(saved, false);
+  } else if (prefersDark) {
+    setTheme('dark', false);
+  } else {
+    setTheme('light', false);
+  }
+})();
+
+themeToggle.addEventListener('click', toggleTheme);
+
+/* ----------------------------------------------------------
+   3. DOM REFERENCES
    ---------------------------------------------------------- */
 const navbar    = document.getElementById('navbar');
 const navLinks  = document.getElementById('navLinks');
@@ -101,7 +169,7 @@ const pubList   = document.getElementById('pubList');
 const pubFilters = document.querySelectorAll('.pfilter');
 
 /* ----------------------------------------------------------
-   3. NAVBAR — SCROLL EFFECT & MOBILE TOGGLE
+   4. NAVBAR — SCROLL EFFECT & MOBILE TOGGLE
    ---------------------------------------------------------- */
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
@@ -123,7 +191,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
 });
 
 /* ----------------------------------------------------------
-   4. ACTIVE NAV LINK — HIGHLIGHT ON SCROLL
+   5. ACTIVE NAV LINK — HIGHLIGHT ON SCROLL
    ---------------------------------------------------------- */
 const sections = document.querySelectorAll('section[id]');
 
@@ -148,7 +216,7 @@ window.addEventListener('scroll', updateActiveNav);
 window.addEventListener('load', updateActiveNav);
 
 /* ----------------------------------------------------------
-   5. REVEAL ANIMATIONS — INTERSECTION OBSERVER
+   6. REVEAL ANIMATIONS — INTERSECTION OBSERVER
    ---------------------------------------------------------- */
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -164,7 +232,7 @@ document.querySelectorAll('[data-reveal]').forEach(el => {
 });
 
 /* ----------------------------------------------------------
-   6. COUNT-UP ANIMATION
+   7. COUNT-UP ANIMATION
    ---------------------------------------------------------- */
 function animateCountUp(el) {
   const target = parseInt(el.dataset.count, 10);
@@ -195,7 +263,7 @@ const countObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
 
 /* ----------------------------------------------------------
-   7. SKILL BAR FILL ANIMATION
+   8. SKILL BAR FILL ANIMATION
    ---------------------------------------------------------- */
 const skillObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -211,7 +279,7 @@ const skillObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.skill-fill').forEach(el => skillObserver.observe(el));
 
 /* ----------------------------------------------------------
-   8. STAT RING (SVG CIRCLE) ANIMATION
+   9. STAT RING (SVG CIRCLE) ANIMATION
    ---------------------------------------------------------- */
 const ringObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -230,7 +298,7 @@ const ringObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.stat-ring-fill').forEach(el => ringObserver.observe(el));
 
 /* ----------------------------------------------------------
-   9. PUBLICATIONS — RENDER & FILTER
+   10. PUBLICATIONS — RENDER & FILTER
    ---------------------------------------------------------- */
 function renderPublications(yearFilter = 'all') {
   const filtered = yearFilter === 'all'
@@ -273,14 +341,14 @@ pubFilters.forEach(btn => {
 renderPublications('all');
 
 /* ----------------------------------------------------------
-   10. BACK TO TOP — SMOOTH SCROLL
+   11. BACK TO TOP — SMOOTH SCROLL
    ---------------------------------------------------------- */
 backTop.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 /* ----------------------------------------------------------
-   11. SMOOTH SCROLL FOR NAV ANCHORS (fallback if CSS fails)
+   12. SMOOTH SCROLL FOR NAV ANCHORS (fallback if CSS fails)
    ---------------------------------------------------------- */
 document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
   link.addEventListener('click', (e) => {
@@ -293,13 +361,13 @@ document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
 });
 
 /* ----------------------------------------------------------
-   12. CONSOLE — WELCOME MESSAGE
+   13. CONSOLE — WELCOME MESSAGE
    ---------------------------------------------------------- */
 console.log('%c🔬 Dr. Avinash Kumar — Academic Profile', 'font-size:1.4rem; font-weight:700; color:#6c8cff;');
 console.log('%cANRF-NPDF, IIT Kanpur • Enzyme Technology & Nanobiotechnology', 'color:#8b8fa3;');
 
 /* ----------------------------------------------------------
-   13. CARD MODAL — GLASS HOVER + CLICK POP-OUT
+   14. CARD MODAL — GLASS HOVER + CLICK POP-OUT
    ---------------------------------------------------------- */
 (function() {
   // Build modal DOM once
