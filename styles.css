@@ -1000,6 +1000,19 @@ ul  { list-style: none; }
   color: var(--text-dim);
   line-height: 1.6;
 }
+.news-link {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+  margin: 6px 0 4px;
+  transition: color 0.2s;
+}
+.news-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
 .news-tag {
   display: inline-block;
   font-size: 0.65rem;
