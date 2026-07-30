@@ -296,7 +296,7 @@ document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
    12. CONSOLE — WELCOME MESSAGE
    ---------------------------------------------------------- */
 console.log('%c🔬 Dr. Avinash Kumar — Academic Profile', 'font-size:1.4rem; font-weight:700; color:#6c8cff;');
-console.log('%cProject Scientist, IIT Kanpur • Enzyme Technology & Nanobiotechnology', 'color:#8b8fa3;');
+console.log('%cANRF-NPDF, IIT Kanpur • Enzyme Technology & Nanobiotechnology', 'color:#8b8fa3;');
 
 /* ----------------------------------------------------------
    13. CARD MODAL — GLASS HOVER + CLICK POP-OUT
